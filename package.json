@@ -1,0 +1,29 @@
+{
+  "name": "storyboard-seedance-node",
+  "version": "1.0.0",
+  "description": "火山方舟豆包与 Seedream 分镜生成工具",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "storyboard",
+    "seedance",
+    "seedream",
+    "express",
+    "video-prompt"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "fs-extra": "^11.2.0",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
