@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>火山方舟分镜生成器</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="topbar">
+      <div>
+        <p class="eyebrow">Ark Doubao + Seedream</p>
+        <h1>分镜与首帧参考图生成器</h1>
+      </div>
+      <span class="status-pill" id="statusPill">未生成</span>
+    </section>
+
+    <section class="panel input-panel">
+      <form id="storyboardForm">
+        <div class="field field-full">
+          <label for="storyText">故事梗概 <span>必填</span></label>
+          <textarea id="storyText" name="storyText" rows="6" required placeholder="输入故事、产品剧情或短视频脚本方向。"></textarea>
+        </div>
+
+        <div class="upload-grid field-full">
+          <div class="upload-card">
+            <label for="styleReferenceImages">视频风格参考图 <span>最多 5 张</span></label>
+            <input id="styleReferenceImages" name="styleReferenceImages" type="file" accept="image/*" multiple>
+            <div class="thumbs" id="styleReferenceImagesPreview"></div>
+          </div>
+          <div class="upload-card">
+            <label for="characterReferenceImages">主角参考图 <span>最多 3 张</span></label>
+            <input id="characterReferenceImages" name="characterReferenceImages" type="file" accept="image/*" multiple>
+            <div class="thumbs" id="characterReferenceImagesPreview"></div>
+          </div>
+          <div class="upload-card">
+            <label for="sceneReferenceImages">场景参考图 <span>最多 5 张</span></label>
+            <input id="sceneReferenceImages" name="sceneReferenceImages" type="file" accept="image/*" multiple>
+            <div class="thumbs" id="sceneReferenceImagesPreview"></div>
+          </div>
+        </div>
+
+        <div class="field field-full">
+          <label for="extraNotes">补充文字说明 <span>可选</span></label>
+          <textarea id="extraNotes" name="extraNotes" rows="3" placeholder="补充品牌、角色、禁忌、道具、语气或镜头偏好。"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="totalDuration">总视频时长</label>
+          <input id="totalDuration" name="totalDuration" type="number" min="1" step="1" value="30">
+        </div>
+
+        <div class="field">
+          <label for="pacing">节奏类型</label>
+          <select id="pacing" name="pacing">
+            <option value="快节奏">快节奏</option>
+            <option value="标准" selected>标准</option>
+            <option value="慢节奏">慢节奏</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="shotCountMode">分镜数量模式</label>
+          <select id="shotCountMode" name="shotCountMode">
+            <option value="自动分析" selected>自动分析</option>
+            <option value="手动指定">手动指定</option>
+          </select>
+        </div>
+
+        <div class="field manual-shot-field" id="manualShotField">
+          <label for="manualShotCount">手动分镜数量</label>
+          <input id="manualShotCount" name="manualShotCount" type="number" min="1" max="60" value="6">
+        </div>
+
+        <div class="field">
+          <label for="aspectRatio">画幅比例</label>
+          <select id="aspectRatio" name="aspectRatio">
+            <option value="9:16" selected>9:16</option>
+            <option value="16:9">16:9</option>
+            <option value="1:1">1:1</option>
+            <option value="4:3">4:3</option>
+            <option value="3:4">3:4</option>
+          </select>
+        </div>
+
+        <label class="checkbox-line">
+          <input id="generateFirstFrames" name="generateFirstFrames" type="checkbox" checked>
+          <span>生成首帧参考图</span>
+        </label>
+
+        <div class="actions field-full">
+          <button class="primary" type="submit" id="generateBtn">分析参考图并生成分镜</button>
+          <button type="button" id="copyAllImageBtn">复制全部图片提示词</button>
+          <button type="button" id="copyAllVideoBtn">复制全部视频提示词</button>
+          <button type="button" id="exportMarkdownBtn">导出 Markdown</button>
+          <button type="button" id="exportJsonBtn">导出 JSON</button>
+          <button type="button" id="clearAllBtn">清空全部</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="result-head">
+      <div>
+        <h2>生成结果</h2>
+        <p id="resultHint">生成后会展示故事分析、参考图分析、自动分镜原因、提示词和首帧参考图。</p>
+      </div>
+    </section>
+
+    <section class="project-summary" id="projectSummary"></section>
+    <section class="cards" id="storyboardCards"></section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
